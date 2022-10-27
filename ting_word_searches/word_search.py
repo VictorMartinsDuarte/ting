@@ -19,11 +19,23 @@ def exists_word(word, instance):
         ]
     if not file["ocorrencias"]:
         return []
-        
+
     file_info = []
     file_info.append(file)
     return file_info
 
 
 def search_by_word(word, instance):
-    """Aqui irá sua implementação"""
+    files_data = all_processed_files(word, instance)
+    for file in files_data:
+        file["ocorrencias"] = [
+            {"linha": i + 1, "conteudo": line}
+            for i, line in enumerate(file["ocorrencias"])
+            if word.lower() in line.lower()
+        ]
+    if not file["ocorrencias"]:
+        return []
+
+    file_info = []
+    file_info.append(file)
+    return file_info
